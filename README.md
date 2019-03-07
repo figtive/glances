@@ -4,3 +4,10 @@
 - Kenia Visakha - 1706020396
 - Muhamad Ilman Nafian - 1706067626
 - Muhammad Rizal Alfaridzi - 1706019740
+
+## Links
+- [Home](https://gitlab.com/ilmannafian04/advprog-project/wikis/home)
+- [CRC Card](https://gitlab.com/ilmannafian04/advprog-project/wikis/Class-Responsibility-Collaboration)
+- [UML Diagram](https://gitlab.com/ilmannafian04/advprog-project/wikis/UML-Diagram)
+- [User Story](https://gitlab.com/ilmannafian04/advprog-project/wikis/User-Story)
+- [PBI](https://docs.google.com/spreadsheets/d/1ak8F62ZosXrX2hF4JpNdYbSZwyH1YPy_wM2bDAx6uvY/edit?usp=sharing)
