@@ -1,11 +1,15 @@
 package myHomepage.notes;
 
 public class Note{
-    private int id;
+    private static Note uniqueInstance = new Note();
     private boolean save;
     private String description;
 
-    public Note(){}
+    private Note(){}
+
+    public static Note getInstance(){
+        return uniqueInstance;
+    }
 
     public void setdescription(String description){
         this.description = description;
@@ -19,14 +23,11 @@ public class Note{
         return save;
     }
 
-    public void searchnotes(int id){
-    }
-
     public String editnotes(){
         return description;
     }
 
     public void deletenotes(){
+        this.description = null;
     }
-
 }
