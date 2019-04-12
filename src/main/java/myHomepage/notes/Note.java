@@ -20,10 +20,10 @@ public class Note{
     }
 
     public boolean savenotes(){
-        return save;
+        return save = true;
     }
 
-    public String editnotes(){
+    public String editnotes(String description){
         return description;
     }
 
