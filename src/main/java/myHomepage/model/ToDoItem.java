@@ -1,4 +1,16 @@
 package myHomepage.model;
 
-public class ToDoItem {
+import java.awt.*;
+
+public abstract class ToDoItem {
+    public boolean check;
+    public String name;
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
