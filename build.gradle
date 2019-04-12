@@ -5,10 +5,14 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
+apply plugin: 'application'
 
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+mainClassName = 'CalendarQuickstart'
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -24,4 +28,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.1.4.RELEASE'
     compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.6.0'
     compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.1.4.RELEASE'
+    compile 'com.google.api-client:google-api-client:1.23.0'
+    compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
+    compile 'com.google.apis:google-api-services-calendar:v3-rev305-1.23.0'
 }
