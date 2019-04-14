@@ -1,4 +1,9 @@
 # My Hompage
+
+[![pipeline status](https://gitlab.com/advance-programming-group-3/advprog-project/badges/master/pipeline.svg)](https://gitlab.com/advance-programming-group-3/advprog-project/commits/master)
+[![coverage report](https://gitlab.com/advance-programming-group-3/advprog-project/badges/master/coverage.svg)](https://gitlab.com/advance-programming-group-3/advprog-project/commits/master)
+
+
 ## Developer
 - Amal Adiguna - 1706018901
 - Kenia Visakha - 1706020396
