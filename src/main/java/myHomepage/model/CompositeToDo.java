@@ -10,5 +10,5 @@ public class CompositeToDo extends ToDoItem {
 
     }
 
-    public
+    //public
 }
