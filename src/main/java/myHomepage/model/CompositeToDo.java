@@ -1,7 +1,14 @@
 package myHomepage.model;
 
-public class CompositeToDo extends ToDoItem {
-    String name;
-    boolean check;
+import java.util.ArrayList;
 
+public class CompositeToDo extends ToDoItem {
+    public CompositeToDo(){
+        String name;
+        boolean check;
+        ArrayList<ToDoItem> subToDo = new ArrayList<>();
+
+    }
+
+    public
 }

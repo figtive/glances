@@ -13,4 +13,7 @@ public abstract class ToDoItem {
     public String getName() {
         return name;
     }
+    public ToDoItem(){
+        return;
+    }
 }
