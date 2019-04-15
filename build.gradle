@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.1.3.RELEASE'
     id 'java'
     id 'idea'
+    id 'jacoco'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -12,6 +13,17 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+test {
+    finalizedBy jacocoTestReport
+//    jacocoTestReport {
+//        reports {
+//            xml.enabled false
+//            csv.enabled false
+//            html.destination "${buildDir}/jacocoHtml"
+//        }
+//    }
 }
 
 dependencies {
