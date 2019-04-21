@@ -1,4 +1,4 @@
-package myHomepage.model;
+package com.glanse.microservices.service.web.model;
 
 import javax.persistence.*;
 

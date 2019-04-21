@@ -1,7 +1,7 @@
-package myHomepage.controller;
+package com.glanse.microservices.service.web.controller;
 
-import myHomepage.model.Student;
-import myHomepage.repository.StudentRepository;
+import com.glanse.microservices.service.web.model.Student;
+import com.glanse.microservices.service.web.repository.StudentRepository;
 import org.hibernate.ObjectNotFoundException;
 //import org.hibernate.Session;
 //import org.hibernate.SessionFactory;

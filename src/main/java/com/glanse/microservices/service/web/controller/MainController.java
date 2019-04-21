@@ -1,4 +1,4 @@
-package myHomepage.controller;
+package com.glanse.microservices.service.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/dashboard")
+    @GetMapping("/")
     public String index() {
+        return "index";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard() {
         return "dashboard";
     }
 }
