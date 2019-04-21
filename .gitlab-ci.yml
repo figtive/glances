@@ -1,6 +1,5 @@
 stages:
   - test
-  - deploy
 
 unit-test:
   image: java:8
@@ -12,28 +11,3 @@ unit-test:
     - chmod +x gradlew
     - ./gradlew test
     - cat build/reports/jacoco/test/html/index.html
-
-deploy-to-staging:
-  image: ruby:2.6
-  stage: deploy
-  environment:
-    name: staging
-    url: $STAGING_URL
-  script:
-    - gem install dpl
-    - dpl --provider=heroku --api-key=$HEROKU_API_KEY --app=$HEROKU_APP_NAME_STAGING
-  only:
-    - staging
-    - deployment-dev
-
-deploy-to-production:
-  image: ruby:2.6
-  stage: deploy
-  environment:
-    name: production
-    url: $PRODUCTION_URL
-  script:
-    - gem install dpl
-    - dpl --provider=heroku --api-key=$HEROKU_API_KEY --app=$HEROKU_APP_NAME_PRODUCTION
-  only:
-    - master
