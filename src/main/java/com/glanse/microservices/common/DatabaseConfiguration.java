@@ -9,10 +9,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EnableJpaRepositories("com.glanse.microservices.service")
-@EntityScan("com.glanse.microservices.service")
 @ComponentScan
-@PropertySource("db.properties")
+@EnableJpaRepositories("com.glanse.microservices.service")
+@EntityScan(basePackages = {"com.glanse.microservices.service"})
+@PropertySource("classpath:db.properties")
 public class DatabaseConfiguration {
 
     @Bean
