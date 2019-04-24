@@ -47,7 +47,7 @@ import com.google.api.services.calendar.model.Event;
 public class CalendarQuickstart{
 
     private final static Log logger = LogFactory.getLog(CalendarQuickstart.class);
-    private static final String APPLICATION_NAME = "";
+    private static final String APPLICATION_NAME = "Glanse";
     private static HttpTransport httpTransport;
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static com.google.api.services.calendar.Calendar client;
