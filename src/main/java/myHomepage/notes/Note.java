@@ -1,33 +1,42 @@
 package myHomepage.notes;
 
+import java.io.*;
+
 public class Note{
-    private static Note uniqueInstance = new Note();
+    //private static Note uniqueInstance = new Note();
     private boolean save;
-    private String description;
+    private String note;
 
-    private Note(){}
+    public Note(){}
+    //private Note(){}//
 
-    public static Note getInstance(){
+    /*private static Note getInstance(){
         return uniqueInstance;
+    }*/
+
+    public void addnote(){
+        File note = new File("note.txt");
     }
 
     public void setdescription(String description){
-        this.description = description;
+        this.note = description;
     }
 
     public String getdescription(){
-        return description;
+        return note;
     }
 
-    public boolean savenotes(){
+    /*public boolean savenotes(){
         return save = true;
+    }*/
+
+    public String editnotes(String desc){
+        this.note = note + " " + desc;
+        return note;
     }
 
-    public String editnotes(String description){
-        return description;
-    }
-
-    public void deletenotes(){
-        this.description = null;
+    public String deletenotes(){
+        this.note = " ";
+        return note;
     }
 }
