@@ -72,12 +72,12 @@ public class CalendarQuickstart{
         this.events = events;
     }
 
-    @RequestMapping(value = "/login/google", method = RequestMethod.GET)
+    @RequestMapping(value = "/login/google/calendar", method = RequestMethod.GET)
     public RedirectView googleConnectionStatus(HttpServletRequest request) throws Exception {
         return new RedirectView(authorize());
     }
 
-    @RequestMapping(value = "/login/google", method = RequestMethod.GET, params = "code")
+    @RequestMapping(value = "/calendar", method = RequestMethod.GET, params = "code")
     public ResponseEntity<String> oauth2Callback(@RequestParam(value = "code") String code) {
         com.google.api.services.calendar.model.Events eventList;
         String message;
