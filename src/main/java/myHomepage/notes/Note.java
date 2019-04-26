@@ -1,5 +1,4 @@
 package myHomepage.notes;
-
 import java.io.*;
 
 public class Note{
@@ -9,15 +8,10 @@ public class Note{
 
     public Note(){}
     //private Note(){}//
-
     /*private static Note getInstance(){
         return uniqueInstance;
     }*/
-
-    public void addnote(){
-        File note = new File("note.txt");
-    }
-
+    
     public void setdescription(String description){
         this.note = description;
     }

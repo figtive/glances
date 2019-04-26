@@ -11,9 +11,7 @@ public class NoteSim{
          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
          //BufferedWriter bw = new BufferedWriter();
          String instruction = br.readLine();
-         String tempnote = " ";
 
-         noteapp.addnote();
         /* switch (instruction){
             case "newnote":
             case "deletenote":
