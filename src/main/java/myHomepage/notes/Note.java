@@ -1,9 +1,5 @@
 package myHomepage.notes;
-<<<<<<< HEAD
 
-public class Note {
-    
-=======
 import java.io.*;
 
 public class Note{
@@ -38,5 +34,4 @@ public class Note{
         this.note = " ";
         return note;
     }
->>>>>>> e9a3d4258184b3d73e96211bcd5aaf5eeecc8b48
 }
