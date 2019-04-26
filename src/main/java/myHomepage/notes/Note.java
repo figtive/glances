@@ -11,7 +11,6 @@ public class Note{
     /*private static Note getInstance(){
         return uniqueInstance;
     }*/
-    
     public void setdescription(String description){
         this.note = description;
     }
@@ -19,10 +18,6 @@ public class Note{
     public String getdescription(){
         return note;
     }
-
-    /*public boolean savenotes(){
-        return save = true;
-    }*/
 
     public String editnotes(String desc){
         this.note = note + " " + desc;

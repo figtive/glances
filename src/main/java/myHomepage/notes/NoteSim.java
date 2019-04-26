@@ -11,12 +11,10 @@ public class NoteSim{
          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
          //BufferedWriter bw = new BufferedWriter();
          String instruction = br.readLine();
-
         /* switch (instruction){
             case "newnote":
             case "deletenote":
             case "modifynote":
-
          }*/
         if(instruction.equals("deletenote")){
            noteapp.deletenotes();
