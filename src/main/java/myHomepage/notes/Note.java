@@ -1,18 +1,10 @@
 package myHomepage.notes;
 
-import java.io.*;
-
 public class Note{
-    //private static Note uniqueInstance = new Note();
-    private boolean save;
+    private String nullnote = " ";
     private String note;
 
     public Note(){}
-    //private Note(){}//
-
-    /*private static Note getInstance(){
-        return uniqueInstance;
-    }*/
     public void setdescription(String description){
         this.note = description;
     }
@@ -22,12 +14,13 @@ public class Note{
     }
 
     public String editnotes(String desc){
-        this.note = note + " " + desc;
+        setdescription(desc);
+        //this.note = note + " " + desc;
         return note;
     }
 
     public String deletenotes(){
-        this.note = " ";
+        this.note = nullnote;
         return note;
     }
 }
