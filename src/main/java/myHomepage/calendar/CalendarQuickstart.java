@@ -1,12 +1,9 @@
 package myHomepage.calendar;
 
 import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
-import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import java.io.IOException;
@@ -14,6 +11,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,15 +27,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl;
-import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.auth.oauth2.TokenResponse;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets.Details;
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar.Events;
 import com.google.api.services.calendar.CalendarScopes;
@@ -50,7 +42,7 @@ public class CalendarQuickstart{
     private static final String APPLICATION_NAME = "Glanse";
     private static HttpTransport httpTransport;
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-    private static com.google.api.services.calendar.Calendar client;
+    private static com.google.api.services.calendar.Calendar calendarClient;
 
     GoogleClientSecrets clientSecrets;
     GoogleAuthorizationCodeFlow flow;
@@ -77,6 +69,7 @@ public class CalendarQuickstart{
         return new RedirectView(authorize());
     }
 
+
     @RequestMapping(value = "/calendar", method = RequestMethod.GET, params = "code")
     public ResponseEntity<String> oauth2Callback(@RequestParam(value = "code") String code) {
         com.google.api.services.calendar.model.Events eventList;
@@ -84,11 +77,12 @@ public class CalendarQuickstart{
         try {
             TokenResponse response = flow.newTokenRequest(code).setRedirectUri(redirectURI).execute();
             credential = flow.createAndStoreCredential(response, "userID");
-            client = new com.google.api.services.calendar.Calendar.Builder(httpTransport, JSON_FACTORY, credential)
+            calendarClient = new com.google.api.services.calendar.Calendar.Builder(httpTransport, JSON_FACTORY, credential)
                     .setApplicationName(APPLICATION_NAME).build();
-            Events events = client.events();
+            Events events = (Events) calendarClient.events();
             eventList = events.list("primary").setTimeMin(date1).setTimeMax(date2).execute();
             message = eventList.getItems().toString();
+            getDesc(eventList.getItems());
             System.out.println("My:" + eventList.getItems());
         } catch (Exception e) {
             logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
@@ -101,8 +95,13 @@ public class CalendarQuickstart{
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-    public Set<Event> getEvents() throws IOException {
-        return this.events;
+    public void getDesc(List<Event> event) throws IOException {
+        for(int i = 0;i<event.size();i++){
+            String eventDesc = "Event Name: "+ event.get(i).getSummary()+"\n"+
+                    "Event Start: " + event.get(i).getStart().toString() +"\n"+
+                    "Event End: "+ event.get(i).getEnd().toString();
+            System.out.println(eventDesc);
+        }
     }
 
     private String authorize() throws Exception {

@@ -25,4 +25,10 @@ public class MainControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Glanse Dashboard")));
     }
+    @Test
+    public void calendarTest() throws Exception {
+        this.mockMvc.perform(get("/login/google/calendar"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Glanse Dashboard")));
+    }
 }

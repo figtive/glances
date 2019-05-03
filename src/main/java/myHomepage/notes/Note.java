@@ -1,37 +1,57 @@
 package myHomepage.notes;
 
 import java.io.*;
+import com.sun.javafx.beans.IDProperty;
 
+/*import javax.presistense.*;
+
+@Entity
+@Table(schema = "glanse")*/
 public class Note{
-    //private static Note uniqueInstance = new Note();
-    private boolean save;
+    private String nullnote = " ";
+
+    /*@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)*/
+    private int id;
+
+    /*@Column (name = "notes")*/
     private String note;
 
-    public Note(){}
-    //private Note(){}//
-    /*private static Note getInstance(){
-        return uniqueInstance;
-    }*/
-    
-    public void setdescription(String description){
+    public Note(){ }
+
+    public Note (int id, String note) {
+        this.note = note;
+        this.id = id;
+    }
+
+  /*  public void setdescription(String description) {
         this.note = description;
-    }
-
-    public String getdescription(){
-        return note;
-    }
-
-    /*public boolean savenotes(){
-        return save = true;
     }*/
 
-    public String editnotes(String desc){
-        this.note = note + " " + desc;
+    public String getdescription() {
         return note;
     }
 
-    public String deletenotes(){
-        this.note = " ";
+    public String editnotes(String desc) {
+        this.note = desc;
+        //this.note = note + " " + desc;
         return note;
+    }
+
+    public String deletenotes() {
+        this.note = nullnote;
+        return note;
+    }
+
+    public int getid(){
+        return id;
+    }
+
+    public void setid(int id){
+        this.id = id;
+    }
+
+    public void printnote(){
+        System.out.println(note);
     }
 }
