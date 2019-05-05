@@ -54,4 +54,5 @@ dependencies {
     compile group: 'org.postgresql', name: 'postgresql'
     compile group: 'org.apache.commons', name: 'commons-dbcp2'
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+    compile group: 'com.google.code.gson', name: 'gson'
 }

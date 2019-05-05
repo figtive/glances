@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         UsernamePasswordAuthenticationFilter.class
                 )
                 .authorizeRequests()
-                .antMatchers("/", "/dashboard").permitAll()
+                .antMatchers("/**", "/dashboard", "/js/**").permitAll()
 //                .antMatchers("/dashboard").hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated();
     }
