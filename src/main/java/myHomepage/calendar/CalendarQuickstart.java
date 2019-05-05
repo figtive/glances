@@ -85,7 +85,7 @@ public class CalendarQuickstart{
             TokenResponse response = flow.newTokenRequest(code).setRedirectUri(redirectURI).execute();
             credential = flow.createAndStoreCredential(response, "userID");
             client = new com.google.api.services.calendar.Calendar.Builder(httpTransport, JSON_FACTORY, credential)
-                    .setApplicationName(APPLICATION_NAME).build();
+                    .setApplicationName(APPLICATION_NAME).build();//Look for more about this
             Events events = client.events();
             eventList = events.list("primary").setTimeMin(date1).setTimeMax(date2).execute();
             message = eventList.getItems().toString();
