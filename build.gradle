@@ -56,8 +56,7 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-dbcp2'
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     compile group: 'com.google.code.gson', name: 'gson'
-    implementation("com.google.api-client:google-api-client")
-    implementation("com.google.oauth-client:google-oauth-client-jetty")
-    implementation("com.google.apis:google-api-services-calendar")
-    implementation("org.springframework.boot:spring-boot-configuration-processor")
+    compile group: 'com.google.api-client', name: 'google-api-client', version: '1.28.0'
+    compile group: 'com.google.oauth-client', name: 'google-oauth-client-jetty', version: '1.28.0'
+    compile group: 'com.google.apis', name: 'google-api-services-calendar', version: 'v3-rev377-1.25.0'
 }
