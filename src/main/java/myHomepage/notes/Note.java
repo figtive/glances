@@ -1,12 +1,12 @@
 package myHomepage.notes;
 
 import java.io.*;
-import com.sun.javafx.beans.IDProperty;
 
-/*import javax.presistense.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
-@Table(schema = "glanse")*/
+@Table(schema = "glanse")
 public class Note{
     private String nullnote = " ";
 
@@ -28,7 +28,7 @@ public class Note{
         this.note = description;
     }*/
 
-    public String getdescription() {
+    public String getDescription() {
         return note;
     }
 
@@ -55,3 +55,4 @@ public class Note{
         System.out.println(note);
     }
 }
+
