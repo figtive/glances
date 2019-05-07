@@ -26,7 +26,6 @@ $(document).ready(function () {
         $("#city-selection-button").click(function () {
             let selectedCityId = $("#cityGroupOption").children("option:selected").val();
             let weatherData = {};
-            $(".weather-info-item").remove();
             $.ajax({
                 url: "weathercheck?cityId=" + selectedCityId,
                 success: function (result) {
@@ -34,6 +33,7 @@ $(document).ready(function () {
                         $.ajax({
                             url: "getweather?cityId=" + selectedCityId,
                             success: function (result) {
+                                $(".weather-info-item").remove();
                                 console.log(result);
                                 weatherData = result;
                                 console.log(weatherData);
@@ -70,6 +70,85 @@ $(document).ready(function () {
                     }
                 }
             });
+        });
+
+        let noteCounter = 0;
+        let nameArray = [];
+        $.ajax({
+            url: "note/getall",
+            success: function (result) {
+                let tabSelector = $("#note-list-tab");
+                let detailSelector = $("#note-list-detail");
+                for (let i = 0; i < result.length; i++) {
+                    tabSelector.append(
+                        "                        <a class=\"list-group-item list-group-item-action\" id=\"list-" + i + "-list\" data-toggle=\"list\" href=\"#list-" + i + "\" role=\"tab\" aria-controls=\"" + i + "\">" + result[i]["name"] + "</a>\n"
+                    );
+                    detailSelector.append(
+                        "                        <div class=\"tab-pane fade\" id=\"list-" + i + "\" role=\"tabpanel\" aria-labelledby=\"list-" + i + "-list\"><span>" + result[i]["detail"] + "</span><br><button type='button' class='btn btn-outline-danger mt-3 delete-note' role='button' value='" + i + "'>Delete</button></div>\n"
+                    );
+                    noteCounter++;
+                    nameArray[nameArray.length] = result[i]["name"];
+                }
+                $(".delete-note").click(function () {
+                    let num = $(this).val();
+                    let nameSelector = $("#list-" + num + "-list");
+                    let nameText = nameSelector.text();
+                    $.ajax({
+                       url: "note/delete?name=" + nameText,
+                        success: function (result) {
+                            if (result["success"]) {
+                                nameSelector.remove();
+                                $("#list-" + num).remove();
+                                let index = nameArray.indexOf(nameText);
+                                nameArray.splice(index, 1)
+                            }
+                        }
+                    });
+                });
+            }
+        });
+        $("#note-add-submit").click(function () {
+            let noteName = $("#add-note-name").val();
+            let noteDetail = $("#note-add-detail").val();
+            if (noteName.length > 0 && noteDetail.length > 0 && !nameArray.includes(noteName)) {
+                $.ajax({
+                    url: "note/post",
+                    data: JSON.stringify({"name": noteName, "detail": noteDetail}),
+                    method: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (result) {
+                        console.log(nameArray);
+                        console.log(noteName);
+                        nameArray[nameArray.length] = noteName;
+                        let tabSelector = $("#note-list-tab");
+                        let detailSelector = $("#note-list-detail");
+                        tabSelector.append(
+                            "                        <a class=\"list-group-item list-group-item-action\" id=\"list-" + noteCounter + "-list\" data-toggle=\"list\" href=\"#list-" + noteCounter + "\" role=\"tab\" aria-controls=\"" + noteCounter + "\">" + result["name"] + "</a>\n"
+                        );
+                        detailSelector.append(
+                            "                        <div class=\"tab-pane fade\" id=\"list-" + noteCounter + "\" role=\"tabpanel\" aria-labelledby=\"list-" + noteCounter + "-list\"><span>" + result["detail"] + "</span><br><button type='button' class='btn btn-outline-danger mt-3 delete-note' role='button' value='" + noteCounter + "'>Delete</button></div>\n"
+                        );
+                        noteCounter++;
+                        $(".delete-note").click(function () {
+                            let num = $(this).val();
+                            let nameSelector = $("#list-" + num + "-list");
+                            let nameText = nameSelector.text();
+                            $.ajax({
+                                url: "note/delete?name=" + nameSelector.text(),
+                                success: function (result) {
+                                    if (result["success"]) {
+                                        nameSelector.remove();
+                                        $("#list-" + num).remove();
+                                        let index = nameArray.indexOf(nameText);
+                                        nameArray.splice(index, 1)
+                                    }
+                                }
+                            });
+                        });
+                    }
+                })
+            }
         })
     }
 );

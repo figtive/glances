@@ -28,9 +28,8 @@
         </ul>
     </div>
 </nav>
-<div class="container mt-3">
-
-    <div class="container" id="weather-module">
+<div class="container mt-5 mb-5">
+    <div class="container mb-3" id="weather-module">
         <div class="row">
             <div class="col" id="weather-input">
                 <div class="input-group mb-3">
@@ -48,7 +47,9 @@
                         <option selected>City found, pleaase choose.</option>
                     </select>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="city-selection-button" disabled>Select</button>
+                        <button class="btn btn-outline-secondary" type="button" id="city-selection-button" disabled>
+                            Select
+                        </button>
                     </div>
                 </div>
             </div>
@@ -57,6 +58,40 @@
                 <span class="weather-info-item">Depok<br></span>
                 <span class="weather-info-item">Cloudy, scattered clouds<br></span>
                 <span class="weather-info-item">Temperature: 10</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="note-container">
+        <h1 class="mb-3">My Notes</h1>
+        <div id="note-objects">
+            <div class="row">
+                <div class="col-4">
+                    <div class="list-group" id="note-list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-add-list" data-toggle="list"
+                           href="#list-add" role="tab" aria-controls="add">Add note</a>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="tab-content" id="note-list-detail">
+                        <div class="tab-pane fade show active" id="list-add" role="tabpanel"
+                             aria-labelledby="list-add-list">
+                            <div>
+                                <div class="form-group">
+                                    <label for="add-note-name">Name</label>
+                                    <input type="text" class="form-control" id="add-note-name"
+                                           placeholder="Enter notes name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="note-add-detail">Detail</label>
+                                    <textarea type="text" class="form-control" id="note-add-detail"
+                                              placeholder="Enter notes detail"></textarea>
+                                </div>
+                                <button type="button" role="button" class="btn btn-outline-dark ml-auto" id="note-add-submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
