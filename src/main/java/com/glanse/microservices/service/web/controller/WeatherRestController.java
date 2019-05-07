@@ -21,7 +21,7 @@ import java.sql.Timestamp;
 import java.util.*;
 
 @RestController
-public class ModuleRestController {
+public class WeatherRestController {
 
     @Value("classpath:static/json/city.list.json")
     private Resource cityListJson;
@@ -30,7 +30,7 @@ public class ModuleRestController {
     private final WeatherRepository weatherRepository;
     private final City city;
 
-    public ModuleRestController(CurrentWeatherRepository currentWeatherRepository, @Qualifier("weatherRepository") WeatherRepository weatherRepository, City city) {
+    public WeatherRestController(CurrentWeatherRepository currentWeatherRepository, @Qualifier("weatherRepository") WeatherRepository weatherRepository, City city) {
         this.currentWeatherRepository = currentWeatherRepository;
         this.weatherRepository = weatherRepository;
         this.city = city;
