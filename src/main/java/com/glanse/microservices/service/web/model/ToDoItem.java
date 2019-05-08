@@ -1,19 +1,22 @@
-package myHomepage.model;
+package com.glanse.microservices.service.web.model;
 
-import java.awt.*;
+import javax.persistence.*;
+import java.util.ArrayList;
 
-public abstract class ToDoItem {
-    boolean check;
-    String name;
+@Entity
+@Table(schema = "glanse")
+public class ToDoItem extends ToDo {
 
-    public void setCheck(boolean check) {
-        this.check = check;
+    @Override
+    public ToDo addSubToDo(ToDo toDo) {
+        ToDoComposite toDoComposite = new ToDoComposite(id, name, done, parentId);
+        toDoComposite.setSubToDos(new ArrayList<>());
+        toDoComposite.addSubToDo(toDo);
+        return toDoComposite;
     }
 
-    public String getName() {
-        return name;
-    }
-    public ToDoItem(){
-        return;
+    @Override
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }
