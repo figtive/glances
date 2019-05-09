@@ -6,15 +6,10 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.google.api.client.util.DateTime;
+import com.google.api.services.calendar.Calendar.Events;
+import com.google.api.services.calendar.CalendarScopes;
+import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,7 +17,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl;
@@ -33,6 +31,10 @@ import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar.Events;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.*;
 
 @Controller
 public class CalendarQuickstart{
@@ -65,12 +67,16 @@ public class CalendarQuickstart{
 
     @RequestMapping(value = "/login/google/calendar", method = RequestMethod.GET)
     public RedirectView googleConnectionStatus(HttpServletRequest request) throws Exception {
-        return new RedirectView(authorize());
+        String authorizationCode = authorize();
+        System.out.println(authorizationCode);
+        return new RedirectView(authorizationCode);
     }
-
 
     @RequestMapping(value = "/calendar", method = RequestMethod.GET, params = "code")
     public ResponseEntity<String> oauth2Callback(@RequestParam(value = "code") String code) {
+
+     /*@RequestMapping(value = "/calendar", method = RequestMethod.GET, params = "code")
+    public Events oauth2Callback(@RequestParam(value = "code") String code) {*/
         com.google.api.services.calendar.model.Events eventList;
         String message;
         try {
@@ -91,6 +97,7 @@ public class CalendarQuickstart{
         }
 
         System.out.println("cal message:" + message);
+        //return (Events) events;
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
@@ -116,6 +123,7 @@ public class CalendarQuickstart{
         }
         authorizationUrl = flow.newAuthorizationUrl().setRedirectUri(redirectURI);
         System.out.println("cal authorizationUrl->" + authorizationUrl);
+        System.out.println("Authorization Build "+authorizationUrl.build());
         return authorizationUrl.build();
     }
 
