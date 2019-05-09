@@ -15,15 +15,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.api.services.calendar.model.EventDateTime;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl;
@@ -118,5 +117,36 @@ public class CalendarQuickstart{
         authorizationUrl = flow.newAuthorizationUrl().setRedirectUri(redirectURI);
         System.out.println("cal authorizationUrl->" + authorizationUrl);
         return authorizationUrl.build();
+    }
+
+
+    @PostMapping(value = "/calendar/add", params = "code")
+    public void createEvent(@RequestParam(value = "code") String code, String summary, String location, String description, int year, int month, int day) throws IOException{
+        Event event = new Event()
+                .setSummary(summary)
+                .setLocation(location)
+                .setDescription(description);
+        String date = String.format("%d-%d-%d", year, month, day);
+        DateTime startDate = new DateTime(date);
+        EventDateTime start = new EventDateTime()
+                .setDate(startDate);
+        event.setStart(start);
+        //---------------------------------------------------------//
+        //---------------------------------------------------------//
+        String message;
+        try {
+            TokenResponse response = flow.newTokenRequest(code).setRedirectUri(redirectURI).execute();
+            credential = flow.createAndStoreCredential(response, "userID");
+            calendarClient = new com.google.api.services.calendar.Calendar.Builder(httpTransport, JSON_FACTORY, credential)
+                    .setApplicationName(APPLICATION_NAME).build();//makes a new instance of calendar
+            event = calendarClient.events().insert("primary", event).execute();
+            System.out.printf("Event created: %s\n", event.getHtmlLink());
+        } catch (Exception e) {
+            logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
+                    + " Redirecting to google connection status page.");
+            message = "Exception while handling OAuth2 callback (" + e.getMessage() + ")."
+                    + " Redirecting to google connection status page.";
+            System.out.println("cal message:" + message);
+        }
     }
 }
