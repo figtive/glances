@@ -158,5 +158,6 @@ public class CalendarQuickstart{
         }
     }
     @PostMapping
-    public void insertEvent(@RequestParam(value = "code") String code,
+    public void insertEvent(@RequestParam(value = "code") String code) {
+    }
 }
