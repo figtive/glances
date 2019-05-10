@@ -1,22 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Glanse</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{css/global-style.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap.css}">
 </head>
 <body>
-<h1>Glanse Dashboard</h1>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/}"><i class="material-icons">loupe</i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Glanse </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{dashboard}">Dashboard <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-5 mb-5">
+    <div class="container mb-3" id="weather-module">
+        <div class="row">
+            <div class="col" id="weather-input">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control city-query" placeholder="City" aria-label="City name"
+                           aria-describedby="city-name-desc">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary city-query-submit" type="button" id="city-name-desc">
+                            Search
+                        </button>
+                    </div>
+                </div>
+                <div class="input-group" id='city-option-input'>
+                    <select class="custom-select" id="cityGroupOption"
+                            aria-label="Select which city you want to display" disabled>
+                        <option selected>City found, pleaase choose.</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="city-selection-button" disabled>
+                            Select
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col" id="weather-display">
+                <h1>Weather</h1>
+                <span class="weather-info-item">Depok<br></span>
+                <span class="weather-info-item">Cloudy, scattered clouds<br></span>
+                <span class="weather-info-item">Temperature: 10</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="note-container">
+        <h1 class="mb-3">My Notes</h1>
+        <div id="note-objects">
+            <div class="row">
+                <div class="col-4">
+                    <div class="list-group" id="note-list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-add-list" data-toggle="list"
+                           href="#list-add" role="tab" aria-controls="add">Add note</a>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="tab-content" id="note-list-detail">
+                        <div class="tab-pane fade show active" id="list-add" role="tabpanel"
+                             aria-labelledby="list-add-list">
+                            <div>
+                                <div class="form-group">
+                                    <label for="add-note-name">Name</label>
+                                    <input type="text" class="form-control" id="add-note-name"
+                                           placeholder="Enter notes name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="note-add-detail">Detail</label>
+                                    <textarea type="text" class="form-control" id="note-add-detail"
+                                              placeholder="Enter notes detail"></textarea>
+                                </div>
+                                <button type="button" role="button" class="btn btn-outline-dark ml-auto" id="note-add-submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script th:src="@{js/jquery-3.4.1.js}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script th:src="@{js/dashboard-script.js}"></script>
 </body>
 </html>
