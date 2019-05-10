@@ -129,7 +129,7 @@ public class CalendarQuickstart{
 
 
     @PostMapping(value = "/calendar/add", params = "code")
-    public void createEvent(@RequestParam(value = "code") String code, String summary, String location, String description, int year, int month, int day) throws IOException{
+    public void createEvent(@RequestParam(value = "code") String code,@RequestParam(value = "summary") String summary,@RequestParam(value = "location") String location, String description, int year, int month, int day) throws IOException{
         Event event = new Event()
                 .setSummary(summary)
                 .setLocation(location)
@@ -157,4 +157,6 @@ public class CalendarQuickstart{
             System.out.println("cal message:" + message);
         }
     }
+    @PostMapping
+    public void insertEvent(@RequestParam(value = "code") String code,
 }
