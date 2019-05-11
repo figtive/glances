@@ -83,5 +83,25 @@ public class ToDoRestController {
         return toDoCompositeRepository.findAllByParentId(null);
     }
 
+    @PostMapping("/todo/composite/addsub")
+    public ToDo addSubToDo2Composite(@RequestBody ToDo toDo) {
+        Optional<ToDo> toDoOptional = toDoRepository.findById(toDo.getParentId());
+        if (toDoOptional.isPresent()) {
+            ToDo parent = toDoOptional.get();
+            parent.addSubToDo(toDo);
+            return toDoRepository.save(parent);
+        }
+        throw new EntityNotFoundException(toDo.getName() + " " + toDo.getId());
+    }
 
+    @GetMapping("/todo/get")
+    public List<ToDo> getAllToDo() {
+        return toDoRepository.findAllByParentId(null);
+    }
+
+    @GetMapping("/todo/drop")
+    public Map<String, Boolean> dropToDo() {
+        toDoRepository.deleteAll();
+        return Collections.singletonMap("success", true);
+    }
 }
