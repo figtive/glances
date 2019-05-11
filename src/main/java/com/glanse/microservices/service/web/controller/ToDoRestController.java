@@ -36,4 +36,19 @@ public class ToDoRestController {
         }
         throw new EntityNotFoundException(id.toString());
     }
+    @PostMapping("/todo/item/post")
+    public ToDoItem postToDoItem(@RequestBody ToDoItem toDoItem) {
+        return toDoItemRepository.save(toDoItem);
+    }
+
+    @PostMapping("/todo/item/postbatch")
+    public List<ToDoItem> postToDoItemBatch(@RequestBody List<ToDoItem> toDoItems) {
+        return toDoItemRepository.saveAll(toDoItems);
+    }
+
+    @GetMapping("/todo/item/get")
+    public List<ToDoItem> getToDoItems() {
+        return toDoItemRepository.findAll();
+    }
+
 }
