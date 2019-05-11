@@ -63,5 +63,25 @@ public class ToDoRestController {
         throw new EntityNotFoundException(toDo.getName() + " " + toDo.getId());
     }
 
+    @PostMapping("/todo/composite/post")
+    public ToDoComposite postToDoComposite(@RequestBody ToDoComposite toDoComposite) {
+        return toDoCompositeRepository.save(toDoComposite);
+    }
+
+    @PostMapping("/todo/composite/postbatch")
+    public List<ToDoComposite> postToDoCompositeBatch(@RequestBody List<ToDoComposite> toDoComposites) {
+        return toDoCompositeRepository.saveAll(toDoComposites);
+    }
+
+    @GetMapping("/todo/composite/get")
+    public List<ToDoComposite> getToDoComposites() {
+        return toDoCompositeRepository.findAll();
+    }
+
+    @GetMapping("/todo/composite/getroot")
+    public List<ToDoComposite> getToDoComposite() {
+        return toDoCompositeRepository.findAllByParentId(null);
+    }
+
 
 }
