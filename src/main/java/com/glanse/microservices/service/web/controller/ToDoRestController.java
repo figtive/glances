@@ -26,4 +26,14 @@ public class ToDoRestController {
         this.toDoItemRepository = toDoItemRepository;
         this.toDoRepository = toDoRepository;
     }
+    @GetMapping("/todo/setdone")
+    public ToDo setToDoDone(@RequestParam(name = "id") Long id, @RequestParam(name = "done") boolean done) {
+        Optional<ToDo> toDoOptional = toDoRepository.findById(id);
+        if (toDoOptional.isPresent()) {
+            ToDo toDo = toDoOptional.get();
+            toDo.setDone(done);
+            return toDoRepository.save(toDo);
+        }
+        throw new EntityNotFoundException(id.toString());
+    }
 }
