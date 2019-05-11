@@ -51,4 +51,17 @@ public class ToDoRestController {
         return toDoItemRepository.findAll();
     }
 
+    @PostMapping("/todo/item/addsub")
+    public ToDo addSubToDo2Item(@RequestBody ToDo toDo) {
+        Optional<ToDo> toDoOptional = toDoRepository.findById(toDo.getParentId());
+        if (toDoOptional.isPresent()) {
+            ToDo parent = toDoOptional.get();
+            ToDo newParent = parent.addSubToDo(toDo);
+            toDoRepository.delete(parent);
+            return toDoRepository.save(newParent);
+        }
+        throw new EntityNotFoundException(toDo.getName() + " " + toDo.getId());
+    }
+
+
 }
