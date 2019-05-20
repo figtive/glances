@@ -33,7 +33,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Controller
-public class CalendarQuickstart{
+public class CalendarQuickstart {
 
     private final static Log logger = LogFactory.getLog(CalendarQuickstart.class);
     private static final String APPLICATION_NAME = "Glanse";
